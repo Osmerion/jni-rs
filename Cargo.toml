@@ -19,7 +19,7 @@ edition = "2018"
 [dependencies]
 cesu8 = "1.1.0"
 combine = "4.1.0"
-jni-sys = "0.3.0"
+jni-sys = { git = "https://github.com/Osmerion/rust-jni-sys" }
 log = "0.4.4"
 thiserror = "1.0.20"
 

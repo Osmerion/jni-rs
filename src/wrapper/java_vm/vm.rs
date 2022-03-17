@@ -146,14 +146,14 @@ impl JavaVM {
     /// *This API requires "invocation" feature to be enabled,
     /// see ["Launching JVM from Rust"](struct.JavaVM.html#launching-jvm-from-rust).*
     #[cfg(feature = "invocation")]
-    pub fn new(args: InitArgs) -> Result<Self> {
+    pub fn new(jni: sys::JNIWrapper, args: InitArgs) -> Result<Self> {
         use std::os::raw::c_void;
 
         let mut ptr: *mut sys::JavaVM = ::std::ptr::null_mut();
         let mut env: *mut sys::JNIEnv = ::std::ptr::null_mut();
 
         unsafe {
-            jni_error_code_to_result(sys::JNI_CreateJavaVM(
+            jni_error_code_to_result(jni.JNI_CreateJavaVM(
                 &mut ptr as *mut _,
                 &mut env as *mut *mut sys::JNIEnv as *mut *mut c_void,
                 args.inner_ptr(),
